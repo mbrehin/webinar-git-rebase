@@ -1,0 +1,253 @@
+{
+  "legend": " ",
+  "comments": " ",
+  "branches": [
+    {
+      "name": {
+        "value": "main",
+        "position": "f30ab"
+      },
+      "tagPosition": "bottom",
+      "commits": ["f30ab"],
+      "head": "f30ab"
+    }
+  ],
+  "steps": [
+    {
+      "legend": "git commit -am 'First commit'",
+      "comments": "Création d’une série de commits",
+      "actions": [
+        {
+          "method": "addCommits",
+          "commits": ["a3c8d"],
+          "branch": "main"
+        },
+        {
+          "method": "moveBranchTag",
+          "branch": "main",
+          "target": "a3c8d"
+        },
+        {
+          "method": "moveHeadTag",
+          "branch": "main"
+        }
+      ]
+    },
+    {
+      "legend": "git commit -am 'Second commit'",
+      "comments": " ",
+      "actions": [
+        {
+          "method": "addCommits",
+          "commits": ["b24dc"],
+          "branch": "main"
+        },
+        {
+          "method": "moveBranchTag",
+          "branch": "main",
+          "target": "b24dc"
+        },
+        {
+          "method": "moveHeadTag",
+          "branch": "main"
+        }
+      ]
+    },
+    {
+      "legend": "git reset --keep HEAD~2",
+      "comments": "Annulation des deux derniers commits",
+      "actions": [
+        {
+          "method": "moveBranchTag",
+          "branch": "main",
+          "target": "f30ab"
+        },
+        {
+          "method": "moveHeadTag",
+          "branch": "main"
+        },
+        {
+          "method": "detachCommits",
+          "branch": "main",
+          "commits": ["a3c8d", "b24dc"]
+        }
+      ]
+    },
+    {
+      "legend": "git commit -am 'Third commit'",
+      "comments": "Création d’un nouveau commit",
+      "actions": [
+        {
+          "method": "addCommits",
+          "commits": ["c2b9e"],
+          "branch": "main"
+        },
+        {
+          "method": "moveBranchTag",
+          "branch": "main",
+          "target": "c2b9e"
+        },
+        {
+          "method": "moveHeadTag",
+          "branch": "main"
+        }
+      ]
+    },
+    {
+      "legend": "git reset --keep HEAD~1",
+      "comments": "Annulation du dernier commit",
+      "actions": [
+        {
+          "method": "moveBranchTag",
+          "branch": "main",
+          "target": "f30ab"
+        },
+        {
+          "method": "moveHeadTag",
+          "branch": "main"
+        },
+        {
+          "method": "detachCommits",
+          "branch": "main",
+          "commits": ["c2b9e"]
+        }
+      ]
+    },
+    {
+      "legend": "git commit -am 'Fourth commit'",
+      "comments": "On repart avec un nouvel historique (le bon cette fois)",
+      "actions": [
+        {
+          "method": "addCommits",
+          "commits": ["d4c6e"],
+          "branch": "main"
+        },
+        {
+          "method": "moveBranchTag",
+          "branch": "main",
+          "target": "d4c6e"
+        },
+        {
+          "method": "moveHeadTag",
+          "branch": "main"
+        }
+      ]
+    },
+    {
+      "legend": "git commit -am 'Fifth commit'",
+      "actions": [
+        {
+          "method": "addCommits",
+          "commits": ["c36d7b"],
+          "branch": "main"
+        },
+        {
+          "method": "moveBranchTag",
+          "branch": "main",
+          "target": "c36d7b"
+        },
+        {
+          "method": "moveHeadTag",
+          "branch": "main"
+        }
+      ]
+    },
+    {
+      "legend": "git gc",
+      "comments": "Purge des références obsolètes (`gc.reflogExpireUnreachable` à 30j) ",
+      "actions": [
+        {
+          "method": "removeCommits",
+          "commits": ["a3c8d", "b24dc", "c2b9e"],
+          "branch": "main"
+        }
+      ]
+    },
+    {
+      "legend": "git reset --keep HEAD~2",
+      "comments": "Finalement on annule ces deux commits",
+      "actions": [
+        {
+          "method": "moveBranchTag",
+          "branch": "main",
+          "target": "f30ab"
+        },
+        {
+          "method": "moveHeadTag",
+          "branch": "main"
+        },
+        {
+          "method": "detachCommits",
+          "branch": "main",
+          "commits": ["d4c6e", "c36d7b"]
+        }
+      ]
+    },
+    {
+      "legend": "git commit -am 'Sixth commit'",
+      "comments": "On repart sur un nouvel historique…",
+      "actions": [
+        {
+          "method": "addCommits",
+          "commits": ["d27c3a"],
+          "branch": "main"
+        },
+        {
+          "method": "moveBranchTag",
+          "branch": "main",
+          "target": "d27c3a"
+        },
+        {
+          "method": "moveHeadTag",
+          "branch": "main"
+        }
+      ]
+    },
+    {
+      "legend": "git reset --keep HEAD@{2}",
+      "comments": "Après réflexion on revient sur nos deux commits précédents",
+      "actions": [
+        {
+          "method": "moveBranchTag",
+          "branch": "main",
+          "target": "c36d7b",
+          "forceY": true
+        },
+        {
+          "method": "moveHeadTag",
+          "branch": "main"
+        },
+        {
+          "method": "attachCommits",
+          "branch": "main",
+          "commits": ["d4c6e", "c36d7b"]
+        },
+        {
+          "method": "detachCommits",
+          "branch": "main",
+          "commits": ["d27c3a"]
+        }
+      ]
+    },
+    {
+      "legend": "git branch feat-useful HEAD@{1}",
+      "comments": "Et puis on va garder notre autre commit sur une branche, au cas où",
+      "actions": [
+        {
+          "method": "setBranch",
+          "branch": {
+            "name": {
+              "value": "feat-useful"
+            },
+            "startAt": "d27c3a"
+          }
+        },
+        {
+          "method": "attachCommits",
+          "branch": "main",
+          "commits": ["d27c3a"]
+        }
+      ]
+    }
+  ]
+}

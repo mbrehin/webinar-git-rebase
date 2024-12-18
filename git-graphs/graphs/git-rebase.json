@@ -1,0 +1,142 @@
+{
+  "legend": "  ",
+  "branches": [
+    {
+      "name": {
+        "value": "main",
+        "position": "87ab2"
+      },
+      "tagPosition": "top",
+      "commits": ["34ac2", "f30ab", "87ab2"],
+      "head": "87ab2"
+    },
+    {
+      "name": {
+        "value": "dev",
+        "position": "a9cdf"
+      },
+      "commits": ["c2b9e", "a9cdf"],
+      "startAt": "f30ab"
+    }
+  ],
+  "steps": [
+    {
+      "legend": "git rebase main dev",
+      "comments": "Décompositions des étapes…",
+      "actions": []
+    },
+    {
+      "legend": " ",
+      "comments": "HEAD placé en tête détachée sur la cible",
+      "actions": [
+        {
+          "method": "moveHeadTag",
+          "branch": "main",
+          "target": "87ab2"
+        }
+      ]
+    },
+    {
+      "legend": " ",
+      "comments": "Application du premier commit",
+      "actions": [
+        {
+          "method": "addCommits",
+          "commits": ["c2b9e’"],
+          "branch": "main"
+        },
+        {
+          "method": "moveHeadTag",
+          "branch": "main",
+          "target": "c2b9e’"
+        }
+      ]
+    },
+    {
+      "legend": " ",
+      "comments": "Application du second commit",
+      "actions": [
+        {
+          "method": "addCommits",
+          "commits": ["a9cdf’"],
+          "branch": "main"
+        },
+        {
+          "method": "moveHeadTag",
+          "branch": "main",
+          "target": "a9cdf’"
+        }
+      ]
+    },
+    {
+      "legend": " ",
+      "comments": "Déplacement de l’étiquette de branche",
+      "actions": [
+        {
+          "method": "moveHeadTag",
+          "branch": "main",
+          "target": "a9cdf’",
+          "tagPosition": "top"
+        },
+        {
+          "method": "moveBranchTag",
+          "branch": "dev",
+          "targetBranch": "main",
+          "target": "a9cdf’",
+          "tagPosition": "bottom"
+        },
+        {
+          "method": "detachCommits",
+          "branch": "dev",
+          "commits": ["c2b9e", "a9cdf"]
+        }
+      ]
+    },
+
+    {
+      "legend": " ",
+      "comments": "Déplacement de HEAD sur la branche",
+      "actions": [
+        {
+          "method": "moveBranchTag",
+          "branch": "dev",
+          "targetBranch": "main",
+          "target": "a9cdf’",
+          "tagPosition": "top"
+        },
+        {
+          "method": "moveHeadTag",
+          "branch": "dev",
+          "tagPosition": "top"
+        }
+      ]
+    },
+
+    {
+      "legend": "git reset --keep dev@{1}",
+      "comments": "Allez, on annule le rebase",
+      "actions": [
+        {
+          "method": "moveBranchTag",
+          "branch": "dev",
+          "target": "a9cdf",
+          "forceY": true
+        },
+        {
+          "method": "moveHeadTag",
+          "branch": "dev"
+        },
+        {
+          "method": "attachCommits",
+          "branch": "dev",
+          "commits": ["c2b9e", "a9cdf"]
+        },
+        {
+          "method": "detachCommits",
+          "branch": "main",
+          "commits": ["c2b9e’", "a9cdf’"]
+        }
+      ]
+    }
+  ]
+}

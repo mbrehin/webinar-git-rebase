@@ -1,0 +1,71 @@
+{
+  "legend": "  ",
+  "headLess": true,
+  "branches": [
+    {
+      "name": {
+        "value": "main",
+        "position": "c3"
+      },
+      "head": "c3",
+      "tagPosition": "top",
+      "commits": ["c1", "c2", "c3"]
+    },
+    {
+      "name": {
+        "value": "stats",
+        "position": "c6"
+      },
+      "commits": ["c5", "c6"],
+      "startAt": "c3"
+    },
+    {
+      "name": {
+        "value": "clients",
+        "position": "c8"
+      },
+      "commits": ["c7", "c8"],
+      "startAt": "c6"
+    }
+  ],
+  "steps": [
+    {
+      "legend": "git rebase --onto main stats clients",
+      "actions": [
+        {
+          "method": "addCommits",
+          "commits": ["c7’", "c8’"],
+          "branch": "main"
+        },
+        {
+          "method": "moveBranchTag",
+          "branch": "clients",
+          "targetBranch": "main",
+          "target": "c8’"
+        },
+        {
+          "method": "detachCommits",
+          "branch": "clients",
+          "commits": ["c7", "c8"]
+        },
+        {
+          "method": "addClassToCommit",
+          "branch": "main",
+          "commit": "c7’",
+          "className": "cherry-picked"
+        },
+        {
+          "method": "addClassToCommit",
+          "branch": "main",
+          "commit": "c8’",
+          "className": "cherry-picked"
+        },
+        {
+          "method": "moveHeadTag",
+          "branch": "clients",
+          "tagPosition": "top"
+        }
+      ]
+    }
+  ]
+}
